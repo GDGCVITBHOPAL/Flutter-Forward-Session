@@ -1,4 +1,4 @@
-# flutter_forward_session
+# Flutter Forward Session
 
 A new Flutter project.
 
