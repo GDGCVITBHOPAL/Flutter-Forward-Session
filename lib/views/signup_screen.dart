@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_forward_session/utils/app_dimensions.dart';
 
@@ -18,6 +19,8 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _hidePass = true;
 
   final _formKey = GlobalKey<FormState>();
+
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -172,10 +175,15 @@ class _SignupScreenState extends State<SignupScreen> {
               width: 250,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print(_emailController.text);
-                    print(_passwordController.text);
+                    await _auth.createUserWithEmailAndPassword(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                    await _auth.currentUser!
+                        .updateDisplayName(_nameController.text);
+                    Navigator.of(context).pushReplacementNamed('/user-screen');
                   }
                 },
                 style: ElevatedButton.styleFrom(
