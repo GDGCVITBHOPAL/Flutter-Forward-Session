@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_forward_session/login_screen.dart';
+import 'package:flutter_forward_session/utils/app_routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       themeMode: ThemeMode.dark,
       title: 'FFS',
-      home: LoginScreen(),
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
+      initialRoute: '/login',
     );
   }
 }
